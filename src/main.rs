@@ -9,9 +9,12 @@ mod config;
 #[tokio::main]
 async fn main() -> () {
     tracing_subscriber::fmt().compact().init();
+
     let state = VismutState::new().await;
+    let listener = tokio::net::TcpListener::bind(state.env.get_host()).await.unwrap();
+    tracing::info!("Vismut Web Editor is listening on {}", state.env.get_host());
+
     let app = build_routes().with_state(state);
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     axum::serve(listener, app.into_make_service())
         .with_graceful_shutdown(shutdown_signal())
         .await

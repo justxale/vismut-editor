@@ -4,7 +4,7 @@ use crate::config::EnvConfig;
 #[derive(Clone)]
 pub struct VismutState {
     connection: DatabaseConnection,
-    env: EnvConfig
+    pub env: EnvConfig
 }
 
 impl VismutState {
