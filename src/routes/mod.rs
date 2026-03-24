@@ -6,12 +6,12 @@ use axum::response::Response;
 use axum::routing::get;
 use axum::{Router};
 use std::time::Duration;
+use tower_http::services::ServeDir;
 use tower_http::timeout::TimeoutLayer;
 use tower_http::trace::{TraceLayer};
 use tracing::{Span};
 
 mod files;
-mod static_files;
 
 async fn handler(Path(path): Path<String>) -> String {
     path
@@ -21,8 +21,8 @@ pub fn build_routes() -> Router<VismutState> {
     Router::new()
         .nest("/api", files::build_files_route())
         .route("/{*path}", get(handler))
-        .layer(
-            (
+        .route_service("/", ServeDir::new("static"))
+        .layer((
                 TraceLayer::new_for_http()
                     .make_span_with(|_: &Request| {
                         tracing::info_span!(
@@ -37,6 +37,5 @@ pub fn build_routes() -> Router<VismutState> {
                         tracing::info!(duration = ?latency.as_millis(), status_code = ?response.status());
                     }),
                 TimeoutLayer::with_status_code(StatusCode::REQUEST_TIMEOUT, Duration::from_secs(5))
-            )
-        )
+        ))
 }
