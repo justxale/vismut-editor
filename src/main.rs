@@ -11,8 +11,8 @@ async fn main() -> () {
     tracing_subscriber::fmt().compact().init();
 
     let state = VismutState::new().await;
-    let listener = tokio::net::TcpListener::bind(state.env.get_host()).await.unwrap();
-    tracing::info!("Vismut Web Editor is listening on {}", state.env.get_host());
+    let listener = tokio::net::TcpListener::bind(state.get_env().get_host()).await.unwrap();
+    tracing::info!("Vismut Web Editor is listening on {}", state.get_env().get_host());
 
     let app = build_routes().with_state(state);
     axum::serve(listener, app.into_make_service())
