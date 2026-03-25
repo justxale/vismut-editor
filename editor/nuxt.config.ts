@@ -29,6 +29,7 @@ export default defineNuxtConfig({
         'rete-area-plugin',
         'rete-connection-plugin',
         'rete-vue-plugin',
+        'rete-render-utils',
       ]
     }
 

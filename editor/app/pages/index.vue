@@ -1,15 +1,13 @@
 <script setup lang="ts">
-const ref = useTemplateRef("rete")
+const reteRef = useTemplateRef("reteRef")
 
 onMounted(async () => {
-    await createEditor(ref.value!)
+    await createEditor(reteRef.value!)
 })
 </script>
 
 <template>
-<div ref="rete" class="w-screen min-h-screen">
-
-</div>
+<div ref="reteRef" class="w-screen min-h-screen bg-panel-100"/>
 </template>
 
 <style scoped>

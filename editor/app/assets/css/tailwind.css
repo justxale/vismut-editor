@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+:root {
+    --vismut-yellow: #FAC476;
+    --vismut-red: #EA6D6D;
+    --vismut-pink: #E07BD3;
+    --vismut-blue: #90C4E9;
+    --vismut-green: #75DA6C;
+
+    --white-900: #FAFAF7;
+    --violet-100: #17161e;
+    --violet-200: #24242c;
+    --violet-300: #2B323F;
+    --violet-400: #201D39;
+}
+
+@theme {
+    --color-vismut-yellow: #FAC476;
+    --color-vismut-red: #EA6D6D;
+    --color-vismut-pink: #E07BD3;
+    --color-vismut-blue: #90C4E9;
+    --color-vismut-green: #75DA6C;
+
+    --color-panel-100: var(--violet-100);
+    --color-panel-200: var(--violet-200);
+    --color-panel-300: var(--violet-300);
+    --color-text-100: var(--white-900);
+}
