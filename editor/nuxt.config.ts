@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     '@vueuse/nuxt',
-    'nuxt-lucide-icons'
+    'nuxt-lucide-icons',
+    'shadcn-nuxt',
   ],
   css: ['~/assets/css/tailwind.css', '~/assets/css/index.css'],
   vite: {
@@ -32,6 +33,19 @@ export default defineNuxtConfig({
         'rete-render-utils',
       ]
     }
-
   },
+  shadcn: {
+    /**
+     * Prefix for all the imported component.
+     * @default "Ui"
+     */
+    prefix: '',
+    /**
+     * Directory that the component lives in.
+     * Will respect the Nuxt aliases.
+     * @link https://nuxt.com/docs/api/nuxt-config#alias
+     * @default "@/components/ui"
+     */
+    componentDir: '@/components/ui'
+  }
 })

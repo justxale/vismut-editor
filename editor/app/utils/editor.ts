@@ -17,10 +17,17 @@ type Schemes = GetSchemes<
 type AreaExtra = VueArea2D<Schemes>;
 
 export async function createEditor(container: HTMLElement) {
-    const socket = new ClassicPreset.Socket("socket");
+    const header = useHeader()
+    const socket = new ClassicPreset.Socket("socket")
+    const editor = new NodeEditor<Schemes>()
+    const area = new AreaPlugin<Schemes, AreaExtra>(container)
 
-    const editor = new NodeEditor<Schemes>();
-    const area = new AreaPlugin<Schemes, AreaExtra>(container);
+    area.signal.addPipe((event) => {
+        if (event.type === 'pointerdown') {
+            header.value = ""
+        }
+        return event
+    })
     const bg = document.createElement("div");
     bg.style.backgroundImage = "linear-gradient(rgba(255,255,255,0.1) 2px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 2px, transparent 1px)"
     bg.style.backgroundSize = "32px 32px, 32px 32px, 16px 16px, 16px 16px"

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {Ref,} from 'rete-vue-plugin'
-import {type ClassicPreset} from "rete";
+import type {ClassicPreset} from "rete";
 
 const props = defineProps<{
     data: ClassicPreset.Node,
@@ -80,7 +80,7 @@ const outputs = computed(() => sortByIndex(Object.entries(props.data.outputs)))
                 v-show="input.control && input.showControl"
                 :data="{ type: 'control', payload: input.control }"
                 :emit="emit"
-                class="z-10 w-[70%] align-middle inline-block"
+                class="z-10 w-[70%] align-middle inline-block text-white"
                 data-testid="input-control"
             />
         </div>
