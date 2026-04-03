@@ -1,8 +1,6 @@
 use axum::http::StatusCode;
 use axum::Json;
-use sea_orm::DbErr;
 use serde::Serialize;
-use crate::responses::ScriptResponse;
 
 #[derive(Serialize)]
 pub struct VismutErrorResponse {

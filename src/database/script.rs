@@ -17,3 +17,15 @@ pub struct Model {
 }
 
 impl ActiveModelBehavior for ActiveModel {}
+
+impl ActiveModel {
+    pub fn new(title: &String) -> Self {
+        Self {
+            id: sea_orm::Set(Uuid::new_v4()),
+            title: sea_orm::Set(title.to_owned()),
+            content: sea_orm::NotSet,
+            created_at: sea_orm::Set(Utc::now()),
+            edited_at: sea_orm::Set(Utc::now())
+        }
+    }
+}

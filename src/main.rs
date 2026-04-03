@@ -1,3 +1,8 @@
+use tracing::instrument::WithSubscriber;
+use tracing::Level;
+use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
+use tracing_subscriber::fmt;
+use tracing_subscriber::util::SubscriberInitExt;
 use crate::routes::build_routes;
 use crate::state::VismutState;
 
@@ -10,7 +15,14 @@ mod requests;
 
 #[tokio::main]
 async fn main() -> () {
-    tracing_subscriber::fmt().compact().init();
+    tracing_subscriber::registry()
+        .with(fmt::layer())
+        .with(
+            tracing_subscriber::filter::targets::Targets::new()
+                .with_target("vismut_core", Level::DEBUG)
+                .with_target("vismut_editor", Level::DEBUG),
+        )
+        .init();
 
     let state = VismutState::new().await;
     let listener = tokio::net::TcpListener::bind(state.get_env().get_host()).await.unwrap();

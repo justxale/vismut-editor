@@ -1,6 +1,6 @@
 use crate::database::{ScriptModel};
 use serde::Serialize;
-use serde_json::Value;
+use uuid::Uuid;
 
 #[derive(Serialize)]
 pub struct AllScriptsResponse {
@@ -17,11 +17,13 @@ impl From<Vec<ScriptModel>> for AllScriptsResponse {
 
 #[derive(Serialize)]
 pub struct ScriptResponse {
-
+    id: Uuid,
+    title: String,
+    content: Option<String>,
 }
 
 impl From<ScriptModel> for ScriptResponse {
     fn from(script: ScriptModel) -> Self {
-        Self {}
+        Self { id: script.id, title: script.title, content: script.content }
     }
 }
