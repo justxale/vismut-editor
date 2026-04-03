@@ -8,8 +8,6 @@ import { cn } from "@/utils/utils"
 const props = defineProps<MenubarTriggerProps & { class?: HTMLAttributes["class"], value: string }>()
 const delegatedProps = reactiveOmit(props, "class")
 
-const menu = useHeader()
-
 const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
@@ -21,7 +19,6 @@ const forwardedProps = useForwardProps(delegatedProps)
       'focus:bg-panel-300 focus:text-text-100 text-text-100 data-[state=open]:bg-panel-300 data-[state=open]:text-text-100 flex items-center rounded-sm px-2 py-1 text-sm font-medium lg:text-[16px] outline-hidden select-none',
       props.class,
     )"
-    @click="() => {menu = props.value}"
   >
     <slot/>
   </MenubarTrigger>

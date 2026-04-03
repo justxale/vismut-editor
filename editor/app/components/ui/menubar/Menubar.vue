@@ -11,7 +11,6 @@ import { cn } from "@/utils/utils"
 const props = defineProps<MenubarRootProps & { class?: HTMLAttributes["class"] }>()
 const emits = defineEmits<MenubarRootEmits>()
 const delegatedProps = reactiveOmit(props, "class")
-const menu = useHeader()
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
@@ -27,7 +26,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         props.class,
       )
     "
-    :model-value="menu"
   >
     <slot v-bind="slotProps" />
   </MenubarRoot>

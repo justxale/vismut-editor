@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {Menubar, MenubarContent, MenubarTrigger, MenubarItem, MenubarMenu} from "~/components/ui/menubar";
+import {Menubar, MenubarContent, MenubarTrigger, MenubarItem, MenubarMenu} from "~/components/ui/menubar"
+import ComponentPanel from "~/components/ComponentPanel.vue"
 </script>
 
 <template>
-<div class="fixed left-0 right-0 p-4 z-3">
-    <header class="bg-panel-300/60 rounded-full w-full backdrop-blur-sm border border-text-100/20 px-4 py-2">
+    <ComponentPanel class="px-4 py-2">
         <Menubar>
             <NuxtImg src="/vismut.svg" width="24" class="mr-2"/>
             <MenubarMenu value="file">
@@ -14,9 +14,14 @@ import {Menubar, MenubarContent, MenubarTrigger, MenubarItem, MenubarMenu} from 
                     <MenubarItem>Open</MenubarItem>
                 </MenubarContent>
             </MenubarMenu>
+            <MenubarMenu value="edit">
+                <MenubarTrigger value="edit">Edit</MenubarTrigger>
+                <MenubarContent>
+                    <MenubarItem>Add Node</MenubarItem>
+                </MenubarContent>
+            </MenubarMenu>
         </Menubar>
-    </header>
-</div>
+    </ComponentPanel>
 </template>
 
 <style scoped>

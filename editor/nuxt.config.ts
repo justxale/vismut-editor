@@ -14,38 +14,32 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
   ],
   css: ['~/assets/css/tailwind.css', '~/assets/css/index.css'],
+  devServer: {
+    port: 11812
+  },
   vite: {
     plugins: [
       tailwindcss()
     ],
     server: {
       hmr: true,
-      allowedHosts: ['lh.justxale.com'],
+      allowedHosts: ['lh.justxale.com', "http://localhost:11811"],
     },
     optimizeDeps: {
       include: [
         '@vue/devtools-core',
         '@vue/devtools-kit',
-        'rete',
-        'rete-area-plugin',
-        'rete-connection-plugin',
-        'rete-vue-plugin',
-        'rete-render-utils',
+        '@vue-flow/core',
+        '@vue-flow/background',
+        'reka-ui',
+        'lucide-vue-next',
+        'clsx',
+        'tailwind-merge'
       ]
     }
   },
   shadcn: {
-    /**
-     * Prefix for all the imported component.
-     * @default "Ui"
-     */
     prefix: '',
-    /**
-     * Directory that the component lives in.
-     * Will respect the Nuxt aliases.
-     * @link https://nuxt.com/docs/api/nuxt-config#alias
-     * @default "@/components/ui"
-     */
     componentDir: '@/components/ui'
   }
 })
