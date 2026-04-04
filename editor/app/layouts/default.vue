@@ -13,7 +13,6 @@ import VismutFileExplorer from "~/components/editor/VismutFileExplorer.vue";
         <VismutNodeExplorer class="pointer-events-auto not-lg:hidden"/>
         <VismutFileExplorer class="pointer-events-auto w-full"/>
     </div>
-
 </template>
 
 <style scoped>

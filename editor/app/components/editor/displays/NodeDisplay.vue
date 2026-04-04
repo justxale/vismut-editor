@@ -3,7 +3,7 @@ defineProps<{data: NodeSchema}>()
 </script>
 
 <template>
-<div class="bg-panel-200 rounded-2xl min-h-32 max-h-80 min-w-32 grow pb-1.5 select-none box-border cursor-pointer text-text-100">
+<div class="bg-panel-200 rounded-2xl min-h-32 max-h-80 min-w-32 grow pb-1.5 select-none box-border cursor-pointer">
     <div class="text-white text-sm p-2 bg-vismut-red rounded-t-2xl mb-2" data-testid="title">{{ data.node_id }}</div>
     <div class="w-full grid grid-cols-2 px-2">
         <div>

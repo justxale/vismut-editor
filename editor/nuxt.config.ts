@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-lucide-icons',
     'shadcn-nuxt',
+    '@nuxt/fonts'
   ],
   css: ['~/assets/css/tailwind.css', '~/assets/css/index.css'],
   devServer: {

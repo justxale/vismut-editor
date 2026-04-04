@@ -5,9 +5,11 @@ await callOnce(store.fetchSchema)
 
 <template>
     <NuxtRouteAnnouncer/>
-    <NuxtLayout>
-        <NuxtPage/>
-    </NuxtLayout>
+    <div class="font-default text-text-100">
+        <NuxtLayout>
+            <NuxtPage/>
+        </NuxtLayout>
+    </div>
 </template>
 
 <style>
