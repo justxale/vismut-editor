@@ -1,0 +1,99 @@
+openapi: "3.0.0"
+servers:
+  - url: http://localhost:11811
+
+info:
+  title: Vismut Web Editor
+  version: 0.1.0
+  description:
+paths:
+  /api/files:
+    get:
+      summary: Get all files for current workspace
+      operationId: get-all-files
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllScriptsResponse"
+        404:
+          description: There are no scripts in current instance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VismutErrorResponse"
+    post:
+      summary: Create file
+      operationId: post-file
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateScript"
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScriptResponse"
+        409:
+          description: File with this name already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VismutErrorResponse"
+  /api/files/{id}:
+    get:
+      summary: Get file
+      operationId: get-file
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScriptResponse"
+        404:
+          description: File with this ID does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VismutErrorResponse"
+
+
+components:
+  schemas:
+    VismutErrorResponse:
+      type: object
+      properties:
+        err:
+          type: string
+    ScriptResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+          nullable: true
+    AllScriptsResponse:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptResponse'
+    CreateScript:
+      type: object
+      properties:
+        title:
+          type: string
+
+
+
