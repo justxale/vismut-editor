@@ -6,9 +6,8 @@ repository = "https://github.com/justxale/vismut-editor"
 license = "Apache-2.0"
 
 [dependencies]
-axum = { version = "0.8.8", features = ["http2", "macros"] }
 sea-orm = { version = "2.0.0-rc.37", default-features = false, features = ["entity-registry", "macros", "runtime-tokio-native-tls", "schema-sync", "sqlite-use-returning-for-3_35", "sqlx-sqlite", "with-chrono", "with-uuid"] }
-tokio = { version = "1.50.0", features = ["rt-multi-thread", "signal"] }
+tokio = { version = "1.50.0", features = ["rt-multi-thread", "signal", "sync"] }
 tower-http = { version = "0.6.8", features = ["cors", "fs", "timeout", "trace"] }
 dotenvy = "0.15.7"
 tower = "0.5.3"
@@ -19,3 +18,5 @@ serde = { version = "1.0.228", features = ["derive"] }
 vismut-core = { git = "https://github.com/justxale/vismut-core.git", version = "0.1.0", features = ["nodes", "serde"] }
 tracing = "0.1.44"
 tracing-subscriber = "0.3.23"
+axum = { version = "0.8.8", features = ["http2", "macros", "ws"] }
+futures-util = "0.3.32"

@@ -15,16 +15,13 @@ use tracing::Span;
 
 mod files;
 mod schema;
-
-async fn handler(Path(path): Path<String>) -> String {
-    path
-}
+mod console;
 
 pub fn build_routes() -> Router<VismutState> {
     Router::new()
         .nest("/api", files::build_files_route())
         .nest("/api", schema::build_schema_route())
-        .route("/{*path}", get(handler))
+        .nest("/api", console::build_console_route())
         .route_service("/", ServeDir::new("static"))
         .layer(
             ServiceBuilder::new()
