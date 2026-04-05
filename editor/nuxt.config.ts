@@ -18,6 +18,11 @@ export default defineNuxtConfig({
   devServer: {
     port: 11812
   },
+  app: {
+    rootAttrs: {
+      id: "vismut-root"
+    }
+  },
   vite: {
     plugins: [
       tailwindcss()

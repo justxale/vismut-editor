@@ -1,3 +1,8 @@
 input {
     background: var(--violet-300);
 }
+
+#vismut-root {
+    min-height: 100vh;
+    width: 100vw;
+}

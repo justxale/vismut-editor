@@ -9,14 +9,11 @@ const { onDragStart } = useDragAndDrop()
 
 <template>
     <div class="flex items-start gap-2 h-full relative">
-        <ComponentPanel v-if="isVisible" class="p-4 w-[25vw] h-full">
-            <div v-if="store.schema" class="grid grid-cols-[repeat(auto-fill,minmax(192px,4fr))] grid-rows-[repeat(auto-fill,minmax(128px,4fr))] gap-4 overflow-y-auto h-full">
+        <ComponentPanel v-if="isVisible" class="p-4 pr-2 w-[25vw] h-full">
+            <div v-if="store.schema" class="grid grid-cols-[repeat(auto-fill,minmax(192px,4fr))] grid-rows-[repeat(auto-fill,minmax(128px,4fr))] gap-4 overflow-y-auto h-full pr-4">
                 <NodeDisplay v-for="node in store.schema.nodes" :data="node" draggable="true" @dragstart="onDragStart"/>
             </div>
         </ComponentPanel>
         <button @click="isVisible = !isVisible" class="text-text-100 absolute -right-12">Close</button>
     </div>
 </template>
-
-<style scoped>
-</style>
