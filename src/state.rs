@@ -1,20 +1,20 @@
-use std::sync::{Arc};
+use std::sync::Arc;
 use sea_orm::{Database, DatabaseConnection};
-use vismut_core::ExecutionEnvironment;
+use vismut_core::VismutExecutionEnvironment;
 use crate::config::EnvConfig;
 
 #[derive(Clone)]
 pub struct VismutState {
     connection: DatabaseConnection,
     env: Arc<EnvConfig>,
-    executor: Arc<ExecutionEnvironment>
+    executor: Arc<VismutExecutionEnvironment>,
 }
 
 
 impl VismutState {
     pub async fn new() -> Self {
         let env = Arc::new(EnvConfig::new());
-        let mut executor = ExecutionEnvironment::default();
+        let mut executor = VismutExecutionEnvironment::default();
         executor.get_schema_mut();
         let connection = Database::connect(
             format!("sqlite://{}?mode=rwc", env.get_db_path())
@@ -32,7 +32,7 @@ impl VismutState {
     }
     
     pub fn get_env(&self) -> &EnvConfig { &self.env }
-    pub fn get_executor(&self) -> &ExecutionEnvironment {
+    pub fn get_executor(&self) -> &VismutExecutionEnvironment {
         &self.executor
     }
 }

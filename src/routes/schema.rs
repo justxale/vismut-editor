@@ -3,7 +3,7 @@ use axum::extract::State;
 use axum::http::StatusCode;
 use axum::Router;
 use axum::routing::get;
-use vismut_core::RegistrySchema;
+use vismut_core::schemas::RegistrySchema;
 use crate::responses::{FailableResponse, VismutErrorResponse};
 use crate::state::VismutState;
 
