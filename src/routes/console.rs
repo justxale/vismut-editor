@@ -9,8 +9,12 @@ use futures_util::stream::{StreamExt, SplitStream, SplitSink};
 use crate::state::VismutState;
 
 async fn write(mut writer: SplitSink<WebSocket, Message>, state: VismutState) {
-    while let Some(message) = state.get_ws_reader().await {}
+    let mut rx = state.sender().subscribe();
     writer.send(Message::text("hi")).await.unwrap();
+    while let Ok(message) = rx.recv().await {
+        writer.send(Message::text(message.to_text().unwrap())).await.unwrap();   
+    }
+    
 }
 
 async fn read(mut reader: SplitStream<WebSocket>) {

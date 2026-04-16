@@ -1,5 +1,8 @@
 use std::sync::Arc;
+use axum::extract::ws::Message;
 use sea_orm::{Database, DatabaseConnection};
+use tokio::sync::broadcast;
+use tokio::sync::broadcast::Sender;
 use vismut_core::VismutExecutionEnvironment;
 use crate::config::EnvConfig;
 
@@ -8,12 +11,14 @@ pub struct VismutState {
     connection: DatabaseConnection,
     env: Arc<EnvConfig>,
     executor: Arc<VismutExecutionEnvironment>,
+    sender: broadcast::Sender<Message>
 }
 
 
 impl VismutState {
     pub async fn new() -> Self {
         let env = Arc::new(EnvConfig::new());
+        let (tx, _) = broadcast::channel(100);
         let mut executor = VismutExecutionEnvironment::default();
         executor.get_schema_mut();
         let connection = Database::connect(
@@ -24,7 +29,7 @@ impl VismutState {
             .sync(&connection)
             .await
             .unwrap();
-        VismutState { connection, env, executor: Arc::new(executor) }
+        VismutState { connection, env, executor: Arc::new(executor), sender: tx }
     }
     
     pub fn get_connection(&self) -> &DatabaseConnection {
@@ -34,5 +39,8 @@ impl VismutState {
     pub fn get_env(&self) -> &EnvConfig { &self.env }
     pub fn get_executor(&self) -> &VismutExecutionEnvironment {
         &self.executor
+    }
+    pub fn sender(&self) -> &Sender<Message> {
+        &self.sender
     }
 }
